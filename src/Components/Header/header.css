@@ -1,0 +1,12 @@
+.headDiv{
+    background-color: greenyellow;
+    display:flex;
+    justify-content: center;
+    width:auto;
+    height: 100px;
+}
+
+.title{
+    color: white;
+    font-size: 50px;
+}

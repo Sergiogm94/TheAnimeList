@@ -1,6 +1,11 @@
+import "./header.css";
+
 export default function Header() {
     return(
-         <h1>The Anime List</h1>
+        <div className="headDiv">
+            <h1 className="title">TheAnimeList</h1>
+        </div>
+         
     );
    
 };

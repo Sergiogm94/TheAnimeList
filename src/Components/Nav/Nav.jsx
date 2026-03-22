@@ -13,6 +13,9 @@ export default function Nav() {
                 </li>
                 <li>
                     <NavLink to="/personajes">Personajes</NavLink>
+                </li>
+                 <li>
+                    <NavLink to="/login">Login/Registro</NavLink>
                 </li>    
             </ul>
         </div>
