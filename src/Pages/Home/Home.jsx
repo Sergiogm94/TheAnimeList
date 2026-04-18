@@ -1,3 +1,4 @@
+import BuscadorAnime from "../../Components/Buscador/Buscador";
 import ContenidoAnime from "../../Components/ContenidoAnime/ContenidoAnime";
 import ContenidoPersonajes from "../../Components/ContenidoPersonajes/ContenidoPersonajes";
 import Footer from "../../Components/Footer/Footer";
@@ -9,6 +10,7 @@ export default function Home() {
     <div>
         <Header></Header>
         <Nav></Nav>
+        <BuscadorAnime></BuscadorAnime>
         <h1>hola</h1>  
         <ContenidoAnime></ContenidoAnime>
         <ContenidoPersonajes></ContenidoPersonajes>
