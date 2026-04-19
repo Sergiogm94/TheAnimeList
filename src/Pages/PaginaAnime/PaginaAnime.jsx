@@ -4,18 +4,19 @@ import axios from "axios";
 import Header from "../../Components/Header/Header";
 import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
-import { AuthContext } from "../../context/authContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function PaginaAnime() {
   const location = useLocation();
+
   const [animes, setAnimes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { usuario } = useContext(AuthContext);
+  const { usuario, favoritos, setFavoritos } = useContext(AuthContext);
 
-  // Obtener el query de la URL
   const busqueda = new URLSearchParams(location.search).get("q");
 
+  // 🔍 cargar animes
   useEffect(() => {
     const fetchAnimes = async () => {
       try {
@@ -25,8 +26,7 @@ export default function PaginaAnime() {
           `http://localhost/TheAnimeList-Backend/apiAnimes.php?q=${busqueda}`
         );
 
-        console.log(res.data.data);
-        setAnimes(res.data.data);
+        setAnimes(res.data.data || []);
       } catch (error) {
         console.error(error);
       } finally {
@@ -34,11 +34,15 @@ export default function PaginaAnime() {
       }
     };
 
-    if (busqueda) {
-      fetchAnimes();
-    }
+    if (busqueda) fetchAnimes();
   }, [busqueda]);
 
+  // 🧠 comprobar favorito
+  const esFavorito = (id_api) => {
+    return favoritos?.some(f => Number(f.id_anime_api) === Number(id_api));
+  };
+
+  // ⭐ añadir favorito
   const añadirFavorito = async (anime) => {
     try {
       const res = await axios.post(
@@ -54,7 +58,15 @@ export default function PaginaAnime() {
       );
 
       if (res.data.success) {
-        alert("Añadido a favoritos ⭐");
+        setFavoritos(prev => [
+          ...prev,
+          {
+            id_anime: res.data.id_anime,
+            id_anime_api: anime.mal_id,
+            titulo: anime.title,
+            imagen: anime.images?.jpg?.image_url
+          }
+        ]);
       } else {
         alert(res.data.mensaje);
       }
@@ -74,33 +86,43 @@ export default function PaginaAnime() {
 
       <h2>Resultados para: {busqueda}</h2>
 
-      {animes.map((anime) => (
-        <div
-          key={anime.mal_id}
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "15px"
-          }}
-        >
-          <h3>{anime.title}</h3>
+      {animes.map((anime) => {
+        const favorito = esFavorito(anime.mal_id);
 
-          <img
-            src={anime.images.jpg.image_url}
-            alt={anime.title}
-            width="150"
-          />
+        return (
+          <div
+            key={anime.mal_id}
+            style={{
+              border: "1px solid #ccc",
+              padding: "10px",
+              marginBottom: "15px"
+            }}
+          >
+            <h3>{anime.title}</h3>
 
-          <p>{anime.synopsis?.slice(0, 150)}...</p>
+            <img
+              src={anime.images.jpg.image_url}
+              alt={anime.title}
+              width="150"
+            />
 
-          {/* Botón solo si está logueado */}
-          {usuario && (
-            <button onClick={() => añadirFavorito(anime)}>
-              ⭐ Añadir a favoritos
-            </button>
-          )}
-        </div>
-      ))}
+            <p>{anime.synopsis?.slice(0, 150)}...</p>
+
+            {/* BOTÓN SIMPLIFICADO */}
+            {usuario && (
+              favorito ? (
+                <button disabled style={{ opacity: 0.6 }}>
+                  ⭐ Ya está en favoritos
+                </button>
+              ) : (
+                <button onClick={() => añadirFavorito(anime)}>
+                  ⭐ Añadir a favoritos
+                </button>
+              )
+            )}
+          </div>
+        );
+      })}
 
       <Footer />
     </div>

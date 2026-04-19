@@ -3,25 +3,38 @@ import axios from "axios";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import Nav from "../../Components/Nav/Nav";
+import "./animes.css";
 
 export default function Animes() {
   const [animes, setAnimes] = useState([]);
   const [pagina, setPagina] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [animando, setAnimando] = useState(false);
+
+  const [animeSeleccionado, setAnimeSeleccionado] = useState(null);
 
   useEffect(() => {
     const fetchAnimes = async () => {
+      setLoading(true);
+      setAnimando(true);
+
       try {
         const res = await axios.get(
-          "http://localhost/TheAnimeList-Backend/apiAnimes.php", {
-            params: {page: pagina},
+          "http://localhost/TheAnimeList-Backend/apiAnimes.php",
+          {
+            params: { page: pagina },
           }
         );
 
-        console.log(res.data);
-
-        setAnimes(res.data.data); // 👈 guardamos los animes
+        setAnimes(res.data.data || []);
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
+
+        setTimeout(() => {
+          setAnimando(false);
+        }, 300);
       }
     };
 
@@ -30,31 +43,108 @@ export default function Animes() {
 
   return (
     <div>
-    <Header></Header>
-    <Nav></Nav>
-      <h1>Lista de Animes</h1>
+      <Header />
+      <Nav />
 
-    {animes.length === 0 ? (
-    <p>Cargando...</p>
+      <div className="anime-page">
+        <h1 className="title">Lista de Animes</h1>
+
+        {/* LOADING */}
+        {loading ? (
+          <p className="loading">Cargando animes...</p>
         ) : (
-    animes.map((anime) => (
-    <div key={anime.mal_id}>
-      <h3>{anime.title}</h3>
-      <img src={anime.images.jpg.image_url} width="120" />
-      <p>{anime.synopsis}</p>
-    </div>
-    ))
-)}
-<div style={{ marginTop: "20px" }}>
-        <button onClick={() => setPagina(pagina - 1)} disabled={pagina === 1}>
-          ⬅️ Anterior
-        </button>
+          <div className={`anime-grid ${animando ? "fade" : ""}`}>
+            {animes.map((anime) => (
+              <div
+                className="anime-card"
+                key={anime.mal_id}
+                onClick={() => {
+                console.log(anime.title, anime.trailer);
+                setAnimeSeleccionado(anime)}}
+              >
+                <img
+                  src={anime.images?.jpg?.image_url}
+                  alt={anime.title}
+                />
 
-        <button onClick={() => setPagina(pagina + 1)}>
-          Siguiente ➡️
-        </button>
+                <div className="anime-info">
+                  <h3>{anime.title}</h3>
+                  <p>
+                    {anime.synopsis
+                      ? anime.synopsis.slice(0, 90) + "..."
+                      : "Sin sinopsis"}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* PAGINACIÓN */}
+        <div className="pagination">
+          <button
+            onClick={() => setPagina((p) => Math.max(p - 1, 1))}
+            disabled={pagina === 1}
+          >
+            ⬅️ Anterior
+          </button>
+
+          <span>Página {pagina}</span>
+
+          <button onClick={() => setPagina((p) => p + 1)}>
+            Siguiente ➡️
+          </button>
+        </div>
       </div>
-<Footer></Footer>
-</div>
+
+      {/* 🔥 MODAL */}
+      {animeSeleccionado && (
+        <div
+          className="modal-overlay"
+          onClick={() => setAnimeSeleccionado(null)}
+        >
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={animeSeleccionado.images?.jpg?.image_url}
+              alt={animeSeleccionado.title}
+            />
+
+            <h2>{animeSeleccionado.title}</h2>
+
+            <p>
+              <strong>Año:</strong>{" "}
+              {animeSeleccionado.year || "Desconocido"}
+            </p>
+
+            <p className="modal-synopsis">
+              {animeSeleccionado.synopsis ||
+                "Sin sinopsis disponible"}
+            </p>
+
+            {animeSeleccionado.trailer?.youtube_id ? (
+                <iframe
+                  width="100%"
+                  height="200"
+                  src={`https://www.youtube.com/embed/${animeSeleccionado.trailer.youtube_id}`}
+                  title="Trailer"
+                  frameBorder="0"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <p className="no-trailer">No hay trailer disponible</p>
+              )}
+
+            <button onClick={() => setAnimeSeleccionado(null)}>
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
+
+      <Footer />
+    </div>
   );
 }

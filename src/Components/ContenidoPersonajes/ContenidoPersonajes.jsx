@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./contenidoPersonajes.css";
 
 export default function ContenidoPersonajes() {
   const [personajes, setPersonajes] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [personajeSeleccionado, setPersonajeSeleccionado] = useState(null);
 
   useEffect(() => {
     const fetchPersonajes = async () => {
@@ -22,14 +25,14 @@ export default function ContenidoPersonajes() {
           (res) => res?.data?.data || []
         );
 
-        if (todosPersonajes.length === 0) {
-          console.warn("No hay personajes");
-          setLoading(false);
-          return;
-        }
+        if (todosPersonajes.length === 0) 
+          { console.warn("No hay personajes");
+             setLoading(false); return;
+            }
 
         const mezclados = todosPersonajes.sort(() => Math.random() - 0.5);
-        setPersonajes(mezclados.slice(0, 5));
+
+        setPersonajes(mezclados.slice(0, 12));
       } catch (error) {
         console.error(error);
       } finally {
@@ -40,37 +43,55 @@ export default function ContenidoPersonajes() {
     fetchPersonajes();
   }, []);
 
-  if (loading) return <p>Cargando personajes...</p>;
-  if (personajes.length === 0) return <p>No se pudieron cargar personajes</p>;
+  if (loading) return <p className="loading">Cargando personajes...</p>;
+
+  if (personajes.length === 0)
+    return <p className="error">No se pudieron cargar personajes</p>;
 
   return (
-    <div>
-      <h1>Personajes aleatorios</h1>
+    <div className="personajes-section">
+      <h1 className="title">Personajes populares</h1>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {personajes.map((personaje) => {
-          if (!personaje) return null;
+      <div className="grid">
+        {personajes.map((personaje) => (
+          <div
+            className="card"
+            key={personaje.mal_id}
+            onClick={() => setPersonajeSeleccionado(personaje)}
+          >
+            <img
+              src={personaje.images?.jpg?.image_url}
+              alt={personaje.name}
+            />
 
-          return (
-            <div
-              key={personaje.mal_id}
-              style={{
-                border: "1px solid #ccc",
-                padding: "10px",
-                width: "200px",
-              }}
-            >
-              <h3>{personaje.name}</h3>
-
-              <img
-                src={personaje.images?.jpg?.image_url}
-                alt={personaje.name}
-                width="100%"
-              />
-            </div>
-          );
-        })}
+            <h3>{personaje.name}</h3>
+          </div>
+        ))}
       </div>
+
+      {/* 🔥 MODAL */}
+      {personajeSeleccionado && (
+        <div
+          className="modal-overlay"
+          onClick={() => setPersonajeSeleccionado(null)}
+        >
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={personajeSeleccionado.images?.jpg?.image_url}
+              alt={personajeSeleccionado.name}
+            />
+
+            <h2>{personajeSeleccionado.name}</h2>
+
+            <button onClick={() => setPersonajeSeleccionado(null)}>
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

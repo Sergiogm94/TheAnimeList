@@ -1,0 +1,198 @@
+/* =========================
+   SECCIÓN GENERAL
+========================= */
+
+.anime-section {
+    padding: 20px;
+    color: white;
+}
+
+/* =========================
+   TÍTULO
+========================= */
+
+.anime-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: orange;
+}
+
+/* =========================
+   GRID RESPONSIVE
+========================= */
+
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.anime-card {
+    background: rgba(20, 20, 20, 0.9);
+    border-radius: 10px;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.anime-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+}
+
+/* =========================
+   IMAGEN
+========================= */
+
+.anime-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+
+    transition: 0.3s;
+}
+
+/* zoom suave en hover */
+.anime-card:hover img {
+    transform: scale(1.05);
+}
+
+/* =========================
+   INFO
+========================= */
+
+.anime-info {
+    padding: 10px;
+}
+
+.anime-info h3 {
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    color: white;
+
+    /* evitar títulos muy largos */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.anime-info p {
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* =========================
+   ESTADOS (loading / error)
+========================= */
+
+.anime-loading,
+.anime-error {
+    text-align: center;
+    font-size: 18px;
+    color: #aaa;
+    margin-top: 40px;
+}
+
+/* =========================
+   OVERLAY
+========================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.8);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    backdrop-filter: blur(5px);
+
+    z-index: 2000;
+}
+
+/* =========================
+   CONTENIDO MODAL
+========================= */
+
+.modal-content {
+    background: #111;
+    color: white;
+
+    padding: 20px;
+    border-radius: 10px;
+
+    width: 350px;
+
+    text-align: center;
+
+    animation: pop 0.3s ease;
+}
+
+/* imagen */
+.modal-content img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* botón */
+.modal-content button {
+    margin-top: 15px;
+
+    background: orange;
+    border: none;
+
+    padding: 10px 15px;
+
+    color: white;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.modal-content button:hover {
+    background: #ff1f5a;
+}
+
+/* animación */
+@keyframes pop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+    .anime-card img {
+        height: 200px;
+    }
+
+    .anime-title {
+        font-size: 22px;
+    }
+}

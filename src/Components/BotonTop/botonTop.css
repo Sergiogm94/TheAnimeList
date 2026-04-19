@@ -1,0 +1,23 @@
+.btn-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+
+    background: orange;
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 50px;
+
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.btn-top:hover {
+    transform: scale(1.2);
+    background: #ff1f5a;
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./buscador.css";
 
 export default function Buscador() {
   const [busqueda, setBusqueda] = useState("");
@@ -20,8 +21,8 @@ export default function Buscador() {
   };
 
   return (
-    <div>
-      <input
+    <div className="buscador-container">
+      <input 
         type="text"
         placeholder="Buscar anime..."
         value={busqueda}

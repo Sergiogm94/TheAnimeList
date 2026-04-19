@@ -1,11 +1,10 @@
 import "./header.css";
+import logo from "../../assets/Logo.png";
 
 export default function Header() {
-    return(
+    return (
         <div className="headDiv">
-            <h1 className="title">TheAnimeList</h1>
+            <img className="logo" src={logo} alt="logo" />
         </div>
-         
     );
-   
-};
+}

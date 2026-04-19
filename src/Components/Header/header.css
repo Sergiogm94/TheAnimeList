@@ -1,12 +1,21 @@
-.headDiv{
-    background-color: greenyellow;
-    display:flex;
+.headDiv {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    width:auto;
-    height: 100px;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                url("https://images.unsplash.com/photo-1541560052-77ec1bbc09f6");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
 
-.title{
-    color: white;
-    font-size: 50px;
+.logo {
+    width: 750px;
+    height: auto;
+    margin-bottom: 10px;
 }
+

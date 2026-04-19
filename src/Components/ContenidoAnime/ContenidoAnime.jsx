@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./contenidoAnime.css";
 
 export default function ContenidoAnime() {
   const [animes, setAnimes] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [animeSeleccionado, setAnimeSeleccionado] = useState(null); // 🔥 modal
 
   useEffect(() => {
     const fetchAnimes = async () => {
@@ -11,9 +14,8 @@ export default function ContenidoAnime() {
         const paginasFetch = [1, 2, 3];
 
         const requests = paginasFetch.map((pagina) =>
-          axios
-            .get(`http://localhost/TheAnimeList-Backend/apiAnimes.php?page=${pagina}`)
-            .catch(() => null)
+          axios.get(`http://localhost/TheAnimeList-Backend/apiAnimes.php?page=${pagina}`)
+          .catch(() => null)
         );
 
         const responses = await Promise.all(requests);
@@ -22,14 +24,14 @@ export default function ContenidoAnime() {
           (res) => res?.data?.data || []
         );
 
-        if (todosAnimes.length === 0) {
-          console.warn("No hay animes");
-          setLoading(false);
-          return;
+        if (todosAnimes.length === 0)
+          { console.warn("No hay animes");
+          setLoading(false); return; 
         }
 
         const mezclados = todosAnimes.sort(() => Math.random() - 0.5);
-        setAnimes(mezclados.slice(0, 5));
+
+        setAnimes(mezclados.slice(0, 12));
       } catch (error) {
         console.error(error);
       } finally {
@@ -40,39 +42,59 @@ export default function ContenidoAnime() {
     fetchAnimes();
   }, []);
 
-  if (loading) return <p>Cargando animes...</p>;
-  if (animes.length === 0) return <p>No se pudieron cargar animes</p>;
+  if (loading) return <p className="anime-loading">Cargando animes...</p>;
 
   return (
-    <div>
-      <h1>Animes aleatorios</h1>
+    <div className="anime-section">
+      <h1 className="anime-title">Animes recomendados</h1>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {animes.map((anime) => {
-          if (!anime) return null;
+      <div className="anime-grid">
+        {animes.map((anime) => (
+          <div
+            className="anime-card"
+            key={anime.mal_id}
+            onClick={() => setAnimeSeleccionado(anime)} // 🔥 abrir modal
+          >
+            <img src={anime.images?.jpg?.image_url} alt={anime.title} />
 
-          return (
-            <div
-              key={anime.mal_id}
-              style={{
-                border: "1px solid #ccc",
-                padding: "10px",
-                width: "200px",
-              }}
-            >
+            <div className="anime-info">
               <h3>{anime.title}</h3>
-
-              <img
-                src={anime.images?.jpg?.image_url}
-                alt={anime.title}
-                width="100%"
-              />
-
-              <p>Popularidad: {anime.popularity}</p>
+              <p>Año: {anime.year}</p>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
+
+      {/* 🔥 MODAL */}
+      {animeSeleccionado && (
+        <div className="modal-overlay" onClick={() => setAnimeSeleccionado(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            
+            <img
+              src={animeSeleccionado.images?.jpg?.image_url}
+              alt={animeSeleccionado.title}
+            />
+
+            <h2>{animeSeleccionado.title}</h2>
+
+            <p>
+              <strong>Popularidad:</strong> {animeSeleccionado.popularity}
+            </p>
+
+            <p>
+              <strong>Score:</strong> {animeSeleccionado.score}
+            </p>
+             <p>
+              <strong>Año:</strong> {animeSeleccionado.year}
+            </p>
+
+            <button onClick={() => setAnimeSeleccionado(null)}>
+              Cerrar
+            </button>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 }

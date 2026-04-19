@@ -9,10 +9,12 @@ import Login from './Components/Login/Login'
 import Animes from './Pages/Animes/Animes'
 import Perfil from './Pages/Perfil/Perfil'
 import Foro from './Pages/Foro/Foro'
+import BotonTop from './Components/BotonTop/BotonTop'
 
 
 function App() {
   return (
+    <div>
     <Router>
       <Routes>
         <Route path="/" element={<Home></Home>}/>
@@ -26,6 +28,8 @@ function App() {
         <Route path="/perfil" element={<Perfil></Perfil>}/>
       </Routes>
     </Router>
+    <BotonTop></BotonTop>
+    </div>
   )
 }
 

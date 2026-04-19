@@ -7,7 +7,11 @@ export function AuthProvider({ children }) {
     const [usuario, setUsuario] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Comprobar la sesion al cargar la app
+    const [favoritos, setFavoritos] = useState([]);
+
+    // -----------------------------
+    // 🔐 comprobar sesión
+    // -----------------------------
     useEffect(() => {
         const checkAuth = async () => {
             try {
@@ -24,6 +28,7 @@ export function AuthProvider({ children }) {
 
             } catch (error) {
                 console.log(error);
+                setUsuario(null);
             } finally {
                 setLoading(false);
             }
@@ -32,20 +37,63 @@ export function AuthProvider({ children }) {
         checkAuth();
     }, []);
 
+    // -----------------------------
+    // ⭐ cargar favoritos cuando hay usuario
+    // -----------------------------
+    useEffect(() => {
+        const cargarFavoritos = async () => {
+            if (!usuario) {
+                setFavoritos([]);
+                return;
+            }
+
+            try {
+                const res = await axios.get(
+                    "http://localhost/TheAnimeList-Backend/obtenerFavoritos.php",
+                    { withCredentials: true }
+                );
+
+                if (res.data.success) {
+                    setFavoritos(res.data.favoritos || []);
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        cargarFavoritos();
+    }, [usuario]);
+
+    // -----------------------------
+    // login
+    // -----------------------------
     const login = (userData) => {
         setUsuario(userData);
     };
 
+    // -----------------------------
+    // logout
+    // -----------------------------
     const logout = async () => {
         await axios.get(
             "http://localhost/TheAnimeList-Backend/logout.php",
             { withCredentials: true }
         );
+
         setUsuario(null);
+        setFavoritos([]);
     };
 
     return (
-        <AuthContext.Provider value={{ usuario, login, logout, loading }}>
+        <AuthContext.Provider value={{
+            usuario,
+            login,
+            logout,
+            loading,
+            favoritos,
+            setFavoritos
+        }}>
             {children}
         </AuthContext.Provider>
     );

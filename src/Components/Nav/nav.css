@@ -1,0 +1,144 @@
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.contenedor {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* sombra al hacer scroll */
+.contenedor.scrolled {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    background: rgba(20, 20, 20, 0.95);
+}
+
+/* =========================
+   LISTA NAV
+========================= */
+
+.contNav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    list-style: none;
+    margin: 0;
+    padding: 15px 20px;
+}
+
+/* links */
+.contNav a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.contNav a:hover {
+    color: orange;
+    transform: scale(1.2);
+}
+
+.contNav a.active {
+    color: orange;
+    font-weight: bold;
+    transform: scale(1.1);
+}
+
+/* =========================
+   SPACER (empuja derecha)
+========================= */
+
+.spacer {
+    flex: 1;
+}
+
+/* =========================
+   BOTÓN LOGOUT
+========================= */
+
+.btnLogout {
+    background: orange;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btnLogout:hover {
+    background: #ff1f5a;
+    transform: scale(1.05);
+}
+
+/* =========================
+   BUSCADOR EN NAV
+========================= */
+
+.nav-search {
+    display: flex;
+    align-items: center;
+}
+
+/* =========================
+   ICONO HAMBURGUESA
+========================= */
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.menu-icon div {
+    width: 25px;
+    height: 3px;
+    background: white;
+    transition: 0.3s;
+}
+
+.menu-icon:hover div {
+    background: orange;
+}
+
+/* animación a X */
+.menu-icon.open div:nth-child(1) {
+    transform: rotate(45deg) translateY(6px);
+}
+
+.menu-icon.open div:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.open div:nth-child(3) {
+    transform: rotate(-45deg) translateY(-6px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+    .contNav a {
+        font-size: 14px;
+    }
+
+    .buscador-container input {
+        width: 120px;
+    }
+}

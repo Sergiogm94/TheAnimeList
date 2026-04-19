@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from "../../context/authContext";
+import { AuthContext } from "../../context/AuthContext";
 import Header from "../../Components/Header/Header";
 import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
