@@ -49,7 +49,6 @@ export default function Animes() {
       <div className="anime-page">
         <h1 className="title">Lista de Animes</h1>
 
-        {/* LOADING */}
         {loading ? (
           <p className="loading">Cargando animes...</p>
         ) : (
@@ -80,7 +79,6 @@ export default function Animes() {
           </div>
         )}
 
-        {/* PAGINACIÓN */}
         <div className="pagination">
           <button
             onClick={() => setPagina((p) => Math.max(p - 1, 1))}
@@ -97,7 +95,6 @@ export default function Animes() {
         </div>
       </div>
 
-      {/* 🔥 MODAL */}
       {animeSeleccionado && (
         <div
           className="modal-overlay"

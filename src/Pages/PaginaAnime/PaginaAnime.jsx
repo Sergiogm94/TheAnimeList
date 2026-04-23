@@ -5,6 +5,7 @@ import Header from "../../Components/Header/Header";
 import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
 import { AuthContext } from "../../context/AuthContext";
+import "./paginaAnime.css";
 
 export default function PaginaAnime() {
   const location = useLocation();
@@ -16,7 +17,7 @@ export default function PaginaAnime() {
 
   const busqueda = new URLSearchParams(location.search).get("q");
 
-  // 🔍 cargar animes
+  // Funcion para cargar los animes según la busqueda.
   useEffect(() => {
     const fetchAnimes = async () => {
       try {
@@ -37,12 +38,14 @@ export default function PaginaAnime() {
     if (busqueda) fetchAnimes();
   }, [busqueda]);
 
-  // 🧠 comprobar favorito
+  // Funcion para comprobar si un anime esta en favoritos.
   const esFavorito = (id_api) => {
-    return favoritos?.some(f => Number(f.id_anime_api) === Number(id_api));
+    return favoritos?.some(
+      (f) => Number(f.id_anime_api) === Number(id_api)
+    );
   };
 
-  // ⭐ añadir favorito
+  //Funcion para añadir un anime a favorito.
   const añadirFavorito = async (anime) => {
     try {
       const res = await axios.post(
@@ -58,7 +61,7 @@ export default function PaginaAnime() {
       );
 
       if (res.data.success) {
-        setFavoritos(prev => [
+        setFavoritos((prev) => [
           ...prev,
           {
             id_anime: res.data.id_anime,
@@ -70,59 +73,69 @@ export default function PaginaAnime() {
       } else {
         alert(res.data.mensaje);
       }
-
     } catch (error) {
       console.error(error);
       alert("Error al añadir favorito");
     }
   };
 
-  if (loading) return <p>Cargando...</p>;
+  if (loading) {
+    return (
+      <div>
+        <Header />
+        <Nav />
+        <p style={{ textAlign: "center", color: "white" }}>
+          Cargando...
+        </p>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div>
       <Header />
       <Nav />
 
-      <h2>Resultados para: {busqueda}</h2>
+      <h2 className="result-title">
+        Resultados para: {busqueda}
+      </h2>
 
-      {animes.map((anime) => {
-        const favorito = esFavorito(anime.mal_id);
+      <div className="anime-grid">
+        {animes.map((anime) => {
+          const favorito = esFavorito(anime.mal_id);
 
-        return (
-          <div
-            key={anime.mal_id}
-            style={{
-              border: "1px solid #ccc",
-              padding: "10px",
-              marginBottom: "15px"
-            }}
-          >
-            <h3>{anime.title}</h3>
+          return (
+            <div key={anime.mal_id} className="anime-card">
+              <h3>{anime.title}</h3>
 
-            <img
-              src={anime.images.jpg.image_url}
-              alt={anime.title}
-              width="150"
-            />
+              <img
+                src={anime.images.jpg.image_url}
+                alt={anime.title}
+              />
 
-            <p>{anime.synopsis?.slice(0, 150)}...</p>
+              <p>
+                {anime.synopsis?.slice(0, 150)}...
+              </p>
 
-            {/* BOTÓN SIMPLIFICADO */}
-            {usuario && (
-              favorito ? (
-                <button disabled style={{ opacity: 0.6 }}>
-                  ⭐ Ya está en favoritos
-                </button>
-              ) : (
-                <button onClick={() => añadirFavorito(anime)}>
-                  ⭐ Añadir a favoritos
-                </button>
-              )
-            )}
-          </div>
-        );
-      })}
+              {usuario && (
+                favorito ? (
+                  <button className="fav-btn disabled" disabled>
+                    ⭐ Ya está en favoritos
+                  </button>
+                ) : (
+                  <button
+                    className="fav-btn"
+                    onClick={() => añadirFavorito(anime)}
+                  >
+                    ⭐ Añadir a favoritos
+                  </button>
+                )
+              )}
+            </div>
+          );
+        })}
+      </div>
 
       <Footer />
     </div>

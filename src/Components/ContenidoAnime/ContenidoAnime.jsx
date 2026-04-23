@@ -6,11 +6,13 @@ export default function ContenidoAnime() {
   const [animes, setAnimes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [animeSeleccionado, setAnimeSeleccionado] = useState(null); // 🔥 modal
+  const [animeSeleccionado, setAnimeSeleccionado] = useState(null);
 
+    // Función para llamar al endpoint php de animes.
   useEffect(() => {
     const fetchAnimes = async () => {
       try {
+        // Número de paginas de la api en que se va a buscar.
         const paginasFetch = [1, 2, 3];
 
         const requests = paginasFetch.map((pagina) =>
@@ -23,7 +25,7 @@ export default function ContenidoAnime() {
         const todosAnimes = responses.flatMap(
           (res) => res?.data?.data || []
         );
-
+        // La api a veces da null, así nos aseguramos de que siempre aparazcan animes.
         if (todosAnimes.length === 0)
           { console.warn("No hay animes");
           setLoading(false); return; 
@@ -53,7 +55,7 @@ export default function ContenidoAnime() {
           <div
             className="anime-card"
             key={anime.mal_id}
-            onClick={() => setAnimeSeleccionado(anime)} // 🔥 abrir modal
+            onClick={() => setAnimeSeleccionado(anime)}
           >
             <img src={anime.images?.jpg?.image_url} alt={anime.title} />
 
@@ -65,7 +67,7 @@ export default function ContenidoAnime() {
         ))}
       </div>
 
-      {/* 🔥 MODAL */}
+      {/* Modal */}
       {animeSeleccionado && (
         <div className="modal-overlay" onClick={() => setAnimeSeleccionado(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

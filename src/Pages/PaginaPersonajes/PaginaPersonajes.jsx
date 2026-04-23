@@ -15,6 +15,7 @@ export default function PaginaPersonajes() {
   const [animesPersonaje, setAnimesPersonaje] = useState([]);
   const [loadingDetalle, setLoadingDetalle] = useState(false);
 
+  // Funciona para traer la informacion de todos los personajes.
   useEffect(() => {
     const fetchCharacters = async () => {
       setLoading(true);
@@ -43,12 +44,13 @@ export default function PaginaPersonajes() {
     fetchCharacters();
   }, [pagina]);
 
-  // 🔥 CLICK PERSONAJE (con fetch extra)
+  //Funcion para abrir el modal.
   const handleClickPersonaje = async (char) => {
     setPersonajeSeleccionado(char);
     setLoadingDetalle(true);
     setAnimesPersonaje([]);
 
+    // Funciona para obtener los animes en los que aparece un personaje.
     try {
       const res = await axios.get(
         `https://api.jikan.moe/v4/characters/${char.mal_id}/full`
@@ -70,7 +72,6 @@ export default function PaginaPersonajes() {
       <div className="personajes-page">
         <h1 className="title">Lista de Personajes</h1>
 
-        {/* LOADING */}
         {loading ? (
           <p className="loading">Cargando personajes...</p>
         ) : (
@@ -91,7 +92,6 @@ export default function PaginaPersonajes() {
           </div>
         )}
 
-        {/* PAGINACIÓN */}
         <div className="pagination">
           <button
             onClick={() => setPagina((p) => Math.max(p - 1, 1))}
@@ -108,7 +108,6 @@ export default function PaginaPersonajes() {
         </div>
       </div>
 
-      {/* 🔥 MODAL */}
       {personajeSeleccionado && (
         <div
           className="modal-overlay"
@@ -136,7 +135,6 @@ export default function PaginaPersonajes() {
                 : "Sin descripción disponible"}
             </p>
 
-            {/* 🔥 ANIMES DONDE APARECE */}
             <h3>Animes donde aparece</h3>
 
             {loadingDetalle ? (

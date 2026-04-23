@@ -11,6 +11,7 @@ export default function Nav() {
 
     const navigate = useNavigate();
 
+    // Función para obtener el usuario una vez que se ha logueado y mpostrarlo en el nav.
     useEffect(() => {
         const obtenerUsuario = async () => {
             try {
@@ -33,6 +34,7 @@ export default function Nav() {
         obtenerUsuario();
     }, []);
 
+    // Funcioón para hacer sticky en navbar.
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 10);
@@ -57,29 +59,28 @@ export default function Nav() {
         }
     };
 
+    //Función para mostrar el buscador.
     const toggleSearch = () => {
         setMostrarBuscador(!mostrarBuscador);
     };
 
     return (
-        <div className={`contenedor ${scrolled ? "scrolled" : ""}`}>
-            <ul className="contNav">
+        <div className={`container ${scrolled ? "scrolled" : ""}`}>
+            <ul className="nav-container">
 
-                {/* LINKS IZQUIERDA */}
                 <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink></li>
                 <li><NavLink to="/animes" className={({ isActive }) => isActive ? "active" : ""}>Animes</NavLink></li>
                 <li><NavLink to="/personajes" className={({ isActive }) => isActive ? "active" : ""}>Personajes</NavLink></li>
                 <li><NavLink to="/foro" className={({ isActive }) => isActive ? "active" : ""}>Foro</NavLink></li>
                 <li><NavLink to="/perfil" className={({ isActive }) => isActive ? "active" : ""}>Perfil</NavLink></li>
 
-                {/* LOGIN / USER */}
                 {!usuario ? (
                     <li>
                         <NavLink to="/loginreg">Login/Registro</NavLink>
                     </li>
                 ) : (
                     <>
-                        <li onClick={() => navigate("/perfil")}>
+                        <li className="userData" onClick={() => navigate("/perfil")}>
                             👤 {usuario.usuario}
                         </li>
                         <li>
@@ -90,17 +91,14 @@ export default function Nav() {
                     </>
                 )}
 
-                {/* 🔥 EMPUJA TODO A LA DERECHA */}
                 <li className="spacer"></li>
 
-                {/* 🔍 BUSCADOR (a la izquierda del icono) */}
                 {mostrarBuscador && (
                     <li className="nav-search">
                         <Buscador />
                     </li>
                 )}
 
-                {/* ☰ ICONO TOGGLE (derecha del todo) */}
                 <li>
                     <div
                         className={`menu-icon ${mostrarBuscador ? "open" : ""}`}

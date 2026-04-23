@@ -1,6 +1,3 @@
-/* =========================
-   SECCIÓN
-========================= */
 
 .personajes-section {
     padding: 20px;
@@ -13,9 +10,6 @@
     color: orange;
 }
 
-/* =========================
-   GRID
-========================= */
 
 .grid {
     display: grid;
@@ -23,9 +17,6 @@
     gap: 20px;
 }
 
-/* =========================
-   CARD
-========================= */
 
 .card {
     background: rgba(20, 20, 20, 0.9);
@@ -45,7 +36,7 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.6);
 }
 
-/* imagen */
+
 .card img {
     width: 100%;
     height: 260px;
@@ -59,9 +50,6 @@
     color: white;
 }
 
-/* =========================
-   MODAL (REUTILIZADO)
-========================= */
 
 .modal-overlay {
     position: fixed;
@@ -123,7 +111,7 @@
     background: #ff1f5a;
 }
 
-/* animación */
+
 @keyframes pop {
     from {
         transform: scale(0.8);

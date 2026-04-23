@@ -1,0 +1,91 @@
+.foro-page {
+    padding: 20px;
+    color: white;
+}
+
+.title {
+    font-size: 26px;
+    color: orange;
+    margin-bottom: 20px;
+}
+
+.comentario-box {
+    background: rgba(20,20,20,0.9);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.comentario-box textarea {
+    resize: none;
+    height: 80px;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: white;
+    outline: none;
+}
+
+.comentario-box textarea:focus {
+    border: 1px solid orange;
+}
+
+.comentario-box button {
+    align-self: flex-end;
+    background: orange;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.comentario-box button:hover {
+    background: #ff1f5a;
+}
+
+.comentario-box button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.comentarios-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comentario {
+    background: rgba(20,20,20,0.8);
+    padding: 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.comentario:hover {
+    transform: scale(1.01);
+}
+
+.comentario-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+
+.comentario p {
+    font-size: 14px;
+    color: #ddd;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+}

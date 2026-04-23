@@ -8,9 +8,11 @@ export default function ContenidoPersonajes() {
 
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState(null);
 
+  // Función para llamar al endpoint php de personajes.
   useEffect(() => {
     const fetchPersonajes = async () => {
       try {
+        // Número de paginas de la api en que se va a buscar.
         const paginasFetch = [1, 2, 3];
 
         const requests = paginasFetch.map((pagina) =>
@@ -24,7 +26,7 @@ export default function ContenidoPersonajes() {
         const todosPersonajes = responses.flatMap(
           (res) => res?.data?.data || []
         );
-
+        // La api a veces da null, así nos aseguramos de que siempre aparazcan personajes.
         if (todosPersonajes.length === 0) 
           { console.warn("No hay personajes");
              setLoading(false); return;
@@ -69,7 +71,7 @@ export default function ContenidoPersonajes() {
         ))}
       </div>
 
-      {/* 🔥 MODAL */}
+      {/*Modla*/}
       {personajeSeleccionado && (
         <div
           className="modal-overlay"

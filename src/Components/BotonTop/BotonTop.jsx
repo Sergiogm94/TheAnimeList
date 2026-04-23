@@ -4,6 +4,7 @@ import "./botonTop.css";
 export default function BotonTop() {
     const [visible, setVisible] = useState(false);
 
+    // Función para que aparzca el boton.
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 200) {
@@ -18,6 +19,7 @@ export default function BotonTop() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Funcioón para volver al top de la web.
     const scrollTop = () => {
         window.scrollTo({
             top: 0,

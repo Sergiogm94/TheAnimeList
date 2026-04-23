@@ -9,9 +9,7 @@ export function AuthProvider({ children }) {
 
     const [favoritos, setFavoritos] = useState([]);
 
-    // -----------------------------
-    // 🔐 comprobar sesión
-    // -----------------------------
+    // Funcion para comprobar si el usuario inicia sesión.
     useEffect(() => {
         const checkAuth = async () => {
             try {
@@ -37,9 +35,7 @@ export function AuthProvider({ children }) {
         checkAuth();
     }, []);
 
-    // -----------------------------
-    // ⭐ cargar favoritos cuando hay usuario
-    // -----------------------------
+    // Funcion para obtener los animes favoritos del usuario logueado.
     useEffect(() => {
         const cargarFavoritos = async () => {
             if (!usuario) {
@@ -65,16 +61,10 @@ export function AuthProvider({ children }) {
         cargarFavoritos();
     }, [usuario]);
 
-    // -----------------------------
-    // login
-    // -----------------------------
     const login = (userData) => {
         setUsuario(userData);
     };
 
-    // -----------------------------
-    // logout
-    // -----------------------------
     const logout = async () => {
         await axios.get(
             "http://localhost/TheAnimeList-Backend/logout.php",

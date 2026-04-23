@@ -1,15 +1,7 @@
-/* =========================
-   PAGINA GENERAL
-========================= */
-
 .anime-page {
     padding: 20px;
     color: white;
 }
-
-/* =========================
-   TITULO
-========================= */
 
 .title {
     font-size: 28px;
@@ -17,19 +9,11 @@
     color: orange;
 }
 
-/* =========================
-   LOADING
-========================= */
-
 .loading {
     text-align: center;
     color: #aaa;
     margin-top: 30px;
 }
-
-/* =========================
-   GRID
-========================= */
 
 .anime-grid {
     display: grid;
@@ -41,24 +25,16 @@
     transition: 0.3s ease;
 }
 
-/* animación cambio página */
 .anime-grid.fade {
     opacity: 0;
     transform: translateY(20px);
 }
 
-/* =========================
-   CARD
-========================= */
-
 .anime-card {
     background: rgba(20, 20, 20, 0.9);
     border-radius: 10px;
-
     overflow: hidden;
-
     cursor: pointer;
-
     transition: 0.3s;
 }
 
@@ -67,14 +43,12 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.6);
 }
 
-/* imagen */
 .anime-card img {
     width: 100%;
     height: 260px;
     object-fit: cover;
 }
 
-/* info */
 .anime-info {
     padding: 10px;
 }
@@ -89,31 +63,22 @@
     color: #aaa;
 }
 
-/* =========================
-   PAGINACIÓN
-========================= */
 
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
-
     gap: 15px;
-
     margin-top: 30px;
 }
 
 .pagination button {
     background: orange;
     border: none;
-
     padding: 8px 15px;
-
     border-radius: 20px;
-
     color: white;
     cursor: pointer;
-
     transition: 0.3s;
 }
 
@@ -129,10 +94,6 @@
 .pagination span {
     color: white;
 }
-
-/* =========================
-   MODAL
-========================= */
 
 .modal-overlay {
     position: fixed;
@@ -171,7 +132,6 @@
     animation: pop 0.25s ease;
 }
 
-/* imagen modal */
 .modal-content img {
     width: 100%;
     height: 220px;
@@ -181,12 +141,10 @@
     margin-bottom: 15px;
 }
 
-/* título modal */
 .modal-content h2 {
     margin-bottom: 10px;
 }
 
-/* sinopsis */
 .modal-synopsis {
     font-size: 14px;
     color: #ccc;
@@ -196,21 +154,14 @@
     line-height: 1.4;
 }
 
-/* botón trailer */
 .trailer-btn {
     display: inline-block;
-
     background: red;
     color: white;
-
     padding: 10px 15px;
-
     border-radius: 20px;
-
     text-decoration: none;
-
     margin-bottom: 10px;
-
     transition: 0.3s;
 }
 
@@ -219,19 +170,13 @@
     transform: scale(1.05);
 }
 
-/* botón cerrar */
 .modal-content button {
     background: orange;
     border: none;
-
     padding: 10px 15px;
-
     color: white;
-
     border-radius: 20px;
-
     cursor: pointer;
-
     transition: 0.3s;
 }
 
@@ -239,7 +184,6 @@
     background: #ff1f5a;
 }
 
-/* animación modal */
 @keyframes pop {
     from {
         transform: scale(0.8);
@@ -250,10 +194,6 @@
         opacity: 1;
     }
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 600px) {
     .anime-card img {

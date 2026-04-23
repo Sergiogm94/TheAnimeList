@@ -1,32 +1,22 @@
-/* =========================
-   NAVBAR BASE
-========================= */
 
-.contenedor {
+.container {
     position: sticky;
     top: 0;
     z-index: 1000;
-
     background: rgba(20, 20, 20, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
     transition: box-shadow 0.3s ease, background 0.3s ease;
 }
 
-/* sombra al hacer scroll */
-.contenedor.scrolled {
+.container.scrolled {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
     background: rgba(20, 20, 20, 0.95);
 }
 
-/* =========================
-   LISTA NAV
-========================= */
 
-.contNav {
+.nav-container {
     display: flex;
     align-items: center;
     gap: 25px;
@@ -36,8 +26,8 @@
     padding: 15px 20px;
 }
 
-/* links */
-.contNav a {
+
+.nav-container a {
     display: inline-block;
     color: white;
     text-decoration: none;
@@ -46,28 +36,26 @@
     transition: 0.3s;
 }
 
-.contNav a:hover {
+.nav-container a:hover {
     color: orange;
     transform: scale(1.2);
 }
 
-.contNav a.active {
+.nav-container a.active {
     color: orange;
     font-weight: bold;
     transform: scale(1.1);
 }
 
-/* =========================
-   SPACER (empuja derecha)
-========================= */
+.userData {
+    color: white;
+}
+
 
 .spacer {
     flex: 1;
 }
 
-/* =========================
-   BOTÓN LOGOUT
-========================= */
 
 .btnLogout {
     background: orange;
@@ -84,18 +72,12 @@
     transform: scale(1.05);
 }
 
-/* =========================
-   BUSCADOR EN NAV
-========================= */
 
 .nav-search {
     display: flex;
     align-items: center;
 }
 
-/* =========================
-   ICONO HAMBURGUESA
-========================= */
 
 .menu-icon {
     display: flex;
@@ -116,7 +98,6 @@
     background: orange;
 }
 
-/* animación a X */
 .menu-icon.open div:nth-child(1) {
     transform: rotate(45deg) translateY(6px);
 }
@@ -129,9 +110,6 @@
     transform: rotate(-45deg) translateY(-6px);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 768px) {
     .contNav a {

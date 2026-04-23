@@ -4,13 +4,14 @@ import { AuthContext } from "../../context/AuthContext";
 import Header from "../../Components/Header/Header";
 import Nav from "../../Components/Nav/Nav";
 import Footer from "../../Components/Footer/Footer";
+import { useNavigate } from "react-router-dom";
+import "./perfil.css";
 
 export default function Perfil() {
     const { usuario, logout, favoritos, setFavoritos } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    // -----------------------------
-    // cargar favoritos SOLO si hace falta
-    // -----------------------------
+   // Función para cargar los favoritos.
     useEffect(() => {
         const fetchFavoritos = async () => {
             try {
@@ -33,9 +34,7 @@ export default function Perfil() {
         }
     }, [usuario]);
 
-    // -----------------------------
-    // eliminar favorito
-    // -----------------------------
+    // Funcion para eliminar los favoritos.
     const quitarFavorito = async (id_anime) => {
         try {
             const res = await axios.post(
@@ -48,8 +47,6 @@ export default function Perfil() {
                 setFavoritos(prev =>
                     prev.filter(a => a.id_anime !== id_anime)
                 );
-            } else {
-                alert(res.data.mensaje);
             }
 
         } catch (error) {
@@ -57,40 +54,61 @@ export default function Perfil() {
         }
     };
 
-    if (!usuario) return <h1>No has iniciado sesión</h1>;
-
+    if (!usuario) return( 
+        <div>
+            <Header></Header>
+            <Nav></Nav>
+            <div className="perfil-login">
+                <h1>No has iniciado sesión</h1>
+                <button className="login-btn" onClick={() => navigate("/loginreg")}>Iniciar Sesión</button>
+            </div>
+            <Footer></Footer> 
+        </div>)
+     
     return (
         <div>
-            <Header />
+         <Header />
             <Nav />
+            <div className="perfil-page">
 
             <h1>Perfil</h1>
-            <p>{usuario}</p>
 
-            <button onClick={logout}>Cerrar sesión</button>
+            <p>{usuario.usuario}</p>
 
-            <h2>Mis favoritos</h2>
+            <button onClick={logout}>
+                Cerrar sesión
+            </button>
+
+            <h2>Animes favoritos</h2>
 
             {favoritos.length === 0 ? (
                 <p>No tienes favoritos aún</p>
             ) : (
-                <div style={{ display: "flex", gap: "15px" }}>
+                <div className="favoritos-grid">
                     {favoritos.map((anime) => (
-                        <div key={anime.id_anime}>
+                        <div className="fav-card" key={anime.id_anime}>
+                            <img
+                                src={anime.imagen}
+                                alt={anime.titulo}
+                            />
+
                             <p>{anime.titulo}</p>
-                            <img src={anime.imagen} width="100" />
 
                             <button
-                                onClick={() => quitarFavorito(anime.id_anime)}
+                                onClick={() =>
+                                    quitarFavorito(anime.id_anime)
+                                }
                             >
-                                Quitar de favoritos
+                                Quitar
                             </button>
                         </div>
                     ))}
                 </div>
             )}
 
-            <Footer />
+            
         </div>
+        <Footer />
+    </div>
     );
 }

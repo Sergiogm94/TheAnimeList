@@ -6,14 +6,14 @@ export default function Buscador() {
   const [busqueda, setBusqueda] = useState("");
   const navigate = useNavigate();
 
-  // Función común para buscar
+  // Función común para buscar animes.
   const handleSearch = () => {
     if (busqueda.trim() !== "") {
       navigate(`/anime?q=${encodeURIComponent(busqueda)}`);
     }
   };
 
-  // Detectar tecla Enter para empezar la busqueda.
+  // Función que detecta la tecla tecla Enter para empezar la busqueda.
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSearch();
