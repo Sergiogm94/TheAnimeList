@@ -13,9 +13,24 @@
     padding: 20px;
 }
 
+/* Desktop por defecto */
 .logo {
     width: 750px;
     height: auto;
     margin-bottom: 10px;
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+    .header-container {
+        height: 75px; /* evita cortes en pantallas pequeñas */
+        padding: 30px 15px;
+    }
+
+    .logo {
+        width: 90%; /* se adapta al ancho de pantalla */
+        max-width: 350px; /* evita que sea enorme en móviles grandes */
+        margin-bottom: 5px;
+    }
 }
 

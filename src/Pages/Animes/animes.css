@@ -15,6 +15,7 @@
     margin-top: 30px;
 }
 
+/* GRID */
 .anime-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -30,6 +31,7 @@
     transform: translateY(20px);
 }
 
+/* CARD */
 .anime-card {
     background: rgba(20, 20, 20, 0.9);
     border-radius: 10px;
@@ -63,13 +65,14 @@
     color: #aaa;
 }
 
-
+/* PAGINATION */
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
 
 .pagination button {
@@ -95,6 +98,7 @@
     color: white;
 }
 
+/* MODAL */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -119,12 +123,12 @@
     color: white;
 
     width: 400px;
+    max-width: 90%;
     max-height: 90vh;
 
     overflow-y: auto;
 
     padding: 20px;
-
     border-radius: 10px;
 
     text-align: center;
@@ -141,35 +145,22 @@
     margin-bottom: 15px;
 }
 
-.modal-content h2 {
-    margin-bottom: 10px;
-}
-
 .modal-synopsis {
     font-size: 14px;
     color: #ccc;
 
     margin: 10px 0 15px 0;
-
     line-height: 1.4;
 }
 
-.trailer-btn {
-    display: inline-block;
-    background: red;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 20px;
-    text-decoration: none;
-    margin-bottom: 10px;
-    transition: 0.3s;
+/* YOUTUBE RESPONSIVE */
+.modal-content iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
 }
 
-.trailer-btn:hover {
-    background: #ff1f5a;
-    transform: scale(1.05);
-}
-
+/* BUTTONS */
 .modal-content button {
     background: orange;
     border: none;
@@ -178,12 +169,14 @@
     border-radius: 20px;
     cursor: pointer;
     transition: 0.3s;
+    margin-top: 10px;
 }
 
 .modal-content button:hover {
     background: #ff1f5a;
 }
 
+/* ANIMATION */
 @keyframes pop {
     from {
         transform: scale(0.8);
@@ -195,12 +188,54 @@
     }
 }
 
-@media (max-width: 600px) {
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+    .anime-page {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .anime-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+    }
+
     .anime-card img {
         height: 200px;
     }
 
+    .anime-info h3 {
+        font-size: 14px;
+    }
+
+    .anime-info p {
+        font-size: 12px;
+    }
+
     .modal-content {
         width: 90%;
+        padding: 15px;
+    }
+
+    .modal-content img {
+        height: 180px;
+    }
+
+    .modal-content iframe {
+        height: 180px;
+    }
+
+    .pagination {
+        gap: 10px;
+    }
+
+    .pagination button {
+        padding: 6px 12px;
+        font-size: 14px;
     }
 }

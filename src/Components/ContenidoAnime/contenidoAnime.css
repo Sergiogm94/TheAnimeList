@@ -4,28 +4,26 @@
     color: white;
 }
 
-
 .anime-title {
     font-size: 28px;
     margin-bottom: 20px;
     color: orange;
 }
 
-
+/* GRID */
 .anime-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
 }
 
-
+/* CARD */
 .anime-card {
     background: rgba(20, 20, 20, 0.9);
     border-radius: 10px;
     overflow: hidden;
 
     cursor: pointer;
-
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -34,21 +32,18 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.7);
 }
 
-
 .anime-card img {
     width: 100%;
     height: 260px;
     object-fit: cover;
-
     transition: 0.3s;
 }
-
 
 .anime-card:hover img {
     transform: scale(1.05);
 }
 
-
+/* INFO */
 .anime-info {
     padding: 10px;
 }
@@ -58,7 +53,6 @@
     margin: 0 0 5px 0;
     color: white;
 
-    /* evitar títulos muy largos */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -69,7 +63,7 @@
     color: #aaa;
 }
 
-
+/* LOADING */
 .anime-loading,
 .anime-error {
     text-align: center;
@@ -78,7 +72,7 @@
     margin-top: 40px;
 }
 
-
+/* MODAL */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -94,10 +88,8 @@
     justify-content: center;
 
     backdrop-filter: blur(5px);
-
     z-index: 2000;
 }
-
 
 .modal-content {
     background: #111;
@@ -107,12 +99,12 @@
     border-radius: 10px;
 
     width: 350px;
+    max-width: 90%;
 
     text-align: center;
 
     animation: pop 0.3s ease;
 }
-
 
 .modal-content img {
     width: 100%;
@@ -122,7 +114,6 @@
     border-radius: 8px;
     margin-bottom: 15px;
 }
-
 
 .modal-content button {
     margin-top: 15px;
@@ -137,7 +128,6 @@
     border-radius: 20px;
 
     cursor: pointer;
-
     transition: 0.3s;
 }
 
@@ -145,7 +135,7 @@
     background: #ff1f5a;
 }
 
-
+/* ANIMATION */
 @keyframes pop {
     from {
         transform: scale(0.8);
@@ -157,12 +147,42 @@
     }
 }
 
-@media (max-width: 600px) {
-    .anime-card img {
-        height: 200px;
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+    .anime-section {
+        padding: 15px;
     }
 
     .anime-title {
         font-size: 22px;
+        text-align: center;
+    }
+
+    .anime-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+    }
+
+    .anime-card img {
+        height: 200px;
+    }
+
+    .anime-info h3 {
+        font-size: 14px;
+    }
+
+    .anime-info p {
+        font-size: 12px;
+    }
+
+    /* MODAL MÁS ADAPTADO */
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .modal-content img {
+        height: 180px;
     }
 }

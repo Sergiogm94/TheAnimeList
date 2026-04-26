@@ -10,30 +10,33 @@
 .perfil-page h1 {
     font-size: 28px;
     color: orange;
-
     margin-bottom: 10px;
 }
 
 .perfil-page > p {
     font-size: 16px;
     color: orange;
-
     margin-bottom: 10px;
 }
 
-.perfil-page button {
+/* BOTÓN LOGOUT (mejor scope) */
+.perfil-page > button {
     background: orange;
     border: none;
+
     padding: 10px 18px;
     border-radius: 20px;
+
     color: white;
     font-size: 14px;
+
     cursor: pointer;
     transition: 0.3s;
+
     margin-bottom: 20px;
 }
 
-.perfil-page button:hover {
+.perfil-page > button:hover {
     background: #ff1f5a;
     transform: scale(1.05);
 }
@@ -45,21 +48,28 @@
     margin-bottom: 10px;
 }
 
+/* GRID */
 .favoritos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 15px;
+
     width: 100%;
     max-width: 1000px;
 }
 
+/* CARD */
 .fav-card {
     background: rgba(20, 20, 20, 0.9);
     border-radius: 10px;
+
     overflow: hidden;
     text-align: center;
+
     padding: 10px;
+
     transition: 0.3s;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,6 +84,7 @@
     width: 100%;
     height: 200px;
     object-fit: cover;
+
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -84,13 +95,17 @@
     margin-bottom: 10px;
 }
 
+/* BUTTON CARD */
 .fav-card button {
     background: #ff1f5a;
     border: none;
+
     padding: 6px 12px;
     border-radius: 20px;
+
     color: white;
     font-size: 12px;
+
     cursor: pointer;
     transition: 0.3s;
 }
@@ -100,21 +115,7 @@
     transform: scale(1.05);
 }
 
-.perfil-page > p:last-of-type {
-    color: #888;
-    font-size: 14px;
-}
-
-@media (max-width: 600px) {
-    .favoritos-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    }
-
-    .fav-card img {
-        height: 170px;
-    }
-}
-
+/* LOGIN STATE */
 .perfil-login {
     min-height: 60vh;
 
@@ -134,30 +135,51 @@
     color: orange;
 }
 
-.perfil-login p {
-    font-size: 14px;
-    color: #aaa;
-}
-
 .login-btn {
     background: linear-gradient(135deg, orange, #ff1f5a);
     border: none;
+
     padding: 12px 25px;
     border-radius: 25px;
+
     color: white;
     font-size: 14px;
     font-weight: bold;
+
     cursor: pointer;
     transition: 0.3s;
+
     box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
 .login-btn:hover {
     transform: scale(1.05);
-
     box-shadow: 0 8px 25px rgba(255, 31, 90, 0.4);
 }
 
-.login-btn:active {
-    transform: scale(0.98);
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+    .perfil-page h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .perfil-page > p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .favoritos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 10px;
+    }
+
+    .fav-card img {
+        height: 170px;
+    }
+
+    .fav-card p {
+        font-size: 13px;
+    }
 }

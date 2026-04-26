@@ -15,18 +15,17 @@
     background: rgba(20, 20, 20, 0.95);
 }
 
-
+/* NAV DESKTOP */
 .nav-container {
     display: flex;
     align-items: center;
     gap: 25px;
-
     list-style: none;
     margin: 0;
     padding: 15px 20px;
 }
 
-
+/* LINKS */
 .nav-container a {
     display: inline-block;
     color: white;
@@ -51,11 +50,9 @@
     color: white;
 }
 
-
 .spacer {
     flex: 1;
 }
-
 
 .btnLogout {
     background: orange;
@@ -72,13 +69,12 @@
     transform: scale(1.05);
 }
 
-
 .nav-search {
     display: flex;
     align-items: center;
 }
 
-
+/* HAMBURGER */
 .menu-icon {
     display: flex;
     flex-direction: column;
@@ -110,13 +106,38 @@
     transform: rotate(-45deg) translateY(-6px);
 }
 
-
+/* 📱 MOBILE */
 @media (max-width: 768px) {
-    .contNav a {
+
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .nav-container a {
+        font-size: 18px;
+    }
+
+    .spacer {
+        display: none;
+    }
+
+    .userData {
         font-size: 14px;
     }
 
-    .buscador-container input {
-        width: 120px;
+    .btnLogout {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .nav-search {
+        width: 100%;
+    }
+
+    .menu-icon {
+        align-self: flex-end;
     }
 }

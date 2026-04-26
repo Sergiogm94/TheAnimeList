@@ -1,14 +1,18 @@
 
 .register-box {
     background: rgba(20, 20, 20, 0.9);
+
     padding: 25px;
     border-radius: 10px;
+
     width: 320px;
+    max-width: 100%;
+
     color: white;
+
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     margin: 0 auto;
 }
-
 
 .register-box h1 {
     text-align: center;
@@ -16,7 +20,6 @@
     color: orange;
     font-size: 22px;
 }
-
 
 .register-box form {
     display: flex;
@@ -29,13 +32,14 @@
     color: #ccc;
 }
 
-
 .register-box input {
     padding: 10px;
     border: none;
     border-radius: 6px;
+
     background: #222;
     color: white;
+
     outline: none;
     transition: 0.3s;
 }
@@ -45,7 +49,7 @@
     box-shadow: 0 0 5px orange;
 }
 
-
+/* BUTTON */
 .register-box button {
     margin-top: 10px;
 
@@ -72,17 +76,36 @@
     cursor: not-allowed;
 }
 
-
 .register-box p {
     margin-top: 10px;
     text-align: center;
     color: #ff4d4d;
 }
 
+/* 📱 MOBILE */
+@media (max-width: 768px) {
 
-@media (max-width: 500px) {
     .register-box {
-        width: 90%;
+        width: 100%;
+        max-width: 360px;
         padding: 20px;
+    }
+
+    .register-box h1 {
+        font-size: 20px;
+    }
+
+    .register-box input {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .register-box button {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .register-box label {
+        font-size: 13px;
     }
 }

@@ -1,4 +1,3 @@
-
 .personajes-section {
     padding: 20px;
     color: white;
@@ -10,20 +9,19 @@
     color: orange;
 }
 
-
+/* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
 }
 
-
+/* CARD */
 .card {
     background: rgba(20, 20, 20, 0.9);
     border-radius: 10px;
 
     overflow: hidden;
-
     cursor: pointer;
 
     text-align: center;
@@ -36,21 +34,24 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.6);
 }
 
-
 .card img {
     width: 100%;
     height: 260px;
     object-fit: cover;
 }
 
-/* nombre */
+/* NAME */
 .card h3 {
     font-size: 14px;
     padding: 10px;
     color: white;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-
+/* MODAL */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -66,7 +67,6 @@
     justify-content: center;
 
     backdrop-filter: blur(5px);
-
     z-index: 2000;
 }
 
@@ -79,6 +79,7 @@
     text-align: center;
 
     width: 300px;
+    max-width: 90%;
 
     animation: pop 0.3s ease;
 }
@@ -111,7 +112,7 @@
     background: #ff1f5a;
 }
 
-
+/* ANIMATION */
 @keyframes pop {
     from {
         transform: scale(0.8);
@@ -120,5 +121,40 @@
     to {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+    .personajes-section {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+    }
+
+    .card img {
+        height: 200px;
+    }
+
+    .card h3 {
+        font-size: 12px;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .modal-content img {
+        height: 180px;
     }
 }

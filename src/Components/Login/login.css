@@ -7,6 +7,7 @@
     border-radius: 10px;
 
     width: 320px;
+    max-width: 100%;
 
     color: white;
 
@@ -19,7 +20,6 @@
     color: orange;
 }
 
-
 .login-box form {
     display: flex;
     flex-direction: column;
@@ -30,8 +30,10 @@
     padding: 10px;
     border: none;
     border-radius: 6px;
+
     background: #222;
     color: white;
+
     outline: none;
 }
 
@@ -39,14 +41,17 @@
     border: 1px solid orange;
 }
 
-
+/* BUTTON */
 .login-box button {
     margin-top: 10px;
     padding: 10px;
+
     border: none;
     border-radius: 20px;
+
     background: orange;
     color: white;
+
     cursor: pointer;
     transition: 0.3s;
 }
@@ -61,9 +66,32 @@
     cursor: not-allowed;
 }
 
-
 .error {
     margin-top: 10px;
     color: #ff4d4d;
     text-align: center;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+    .login-box {
+        width: 100%;
+        max-width: 360px;
+        padding: 20px;
+    }
+
+    .login-box h2 {
+        font-size: 20px;
+    }
+
+    .login-box input {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .login-box button {
+        font-size: 14px;
+        padding: 12px;
+    }
 }

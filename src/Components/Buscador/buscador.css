@@ -13,6 +13,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 
     transition: 0.3s;
+    max-width: 100%;
 }
 
 .buscador-container:focus-within {
@@ -30,6 +31,7 @@
     font-size: 16px;
 
     width: 220px;
+    max-width: 100%;
 }
 
 /* PLACEHOLDER */
@@ -49,9 +51,30 @@
     font-weight: bold;
 
     transition: 0.3s;
+    white-space: nowrap;
 }
 
 .buscador-container button:hover {
     background: #ff1f5a;
     transform: scale(1.05);
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+    .buscador-container {
+        width: 100%;
+        justify-content: space-between;
+        padding: 8px 12px;
+    }
+
+    .buscador-container input {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .buscador-container button {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
 }

@@ -13,6 +13,7 @@
     color: orange;
 }
 
+/* TABS */
 .tabs {
     display: flex;
     gap: 10px;
@@ -39,6 +40,7 @@
     border: none;
 }
 
+/* FORM */
 .form-container {
     width: 100%;
     display: flex;
@@ -49,6 +51,7 @@
     animation: fadeIn 0.3s ease;
 }
 
+/* ANIMATION */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -57,5 +60,34 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+    .login-page {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .tabs {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .tabs button {
+        flex: 1;
+        padding: 10px 0;
+        font-size: 14px;
+    }
+
+    .form-container {
+        width: 100%;
     }
 }
