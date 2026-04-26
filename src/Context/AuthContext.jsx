@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
+export default function AuthProvider({ children }) {
     const [usuario, setUsuario] = useState(null);
     const [loading, setLoading] = useState(true);
 
