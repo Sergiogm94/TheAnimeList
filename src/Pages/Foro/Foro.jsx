@@ -16,7 +16,7 @@ export default function Foro() {
   const fetchComentarios = async () => {
     try {
       const res = await axios.get(
-        "http://localhost/TheAnimeList-Backend/recuperarComentarios.php",
+        "http://the-anime-list-backend.rf.gd/recuperarComentarios.php",
         { withCredentials: true }
       );
 
@@ -39,7 +39,7 @@ export default function Foro() {
 
     try {
       await axios.post(
-        "http://localhost/TheAnimeList-Backend/crearComentario.php",
+        "http://the-anime-list-backend.rf.gd/crearComentario.php",
         { contenido: texto },
         { withCredentials: true }
       );

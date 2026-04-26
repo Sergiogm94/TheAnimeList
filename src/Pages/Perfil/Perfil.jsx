@@ -16,7 +16,7 @@ export default function Perfil() {
         const fetchFavoritos = async () => {
             try {
                 const res = await axios.get(
-                    "http://localhost/TheAnimeList-Backend/obtenerFavoritos.php",
+                    "http://the-anime-list-backend.rf.gd/obtenerFavoritos.php",
                     { withCredentials: true }
                 );
 
@@ -38,7 +38,7 @@ export default function Perfil() {
     const quitarFavorito = async (id_anime) => {
         try {
             const res = await axios.post(
-                "http://localhost/TheAnimeList-Backend/eliminarFavoritos.php",
+                "http://the-anime-list-backend.rf.gd/eliminarFavoritos.php",
                 { id_anime },
                 { withCredentials: true }
             );

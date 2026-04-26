@@ -17,7 +17,7 @@ export default function ContenidoPersonajes() {
 
         const requests = paginasFetch.map((pagina) =>
           axios
-            .get(`http://localhost/TheAnimeList-Backend/apiPersonajes.php?page=${pagina}`)
+            .get(`http://the-anime-list-backend.rf.gd/apiPersonajes.php?page=${pagina}`)
             .catch(() => null)
         );
 

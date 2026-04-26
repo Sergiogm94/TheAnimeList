@@ -23,7 +23,7 @@ export default function PaginaPersonajes() {
 
       try {
         const res = await axios.get(
-          "http://localhost/TheAnimeList-Backend/apiPersonajes.php",
+          "http://the-anime-list-backend.rf.gd/apiPersonajes.php",
           {
             params: { page: pagina },
           }

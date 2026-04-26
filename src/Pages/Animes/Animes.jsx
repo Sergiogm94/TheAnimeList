@@ -20,7 +20,7 @@ export default function Animes() {
 
       try {
         const res = await axios.get(
-          "http://localhost/TheAnimeList-Backend/apiAnimes.php",
+          "http://the-anime-list-backend.rf.gd/apiAnimes.php",
           {
             params: { page: pagina },
           }

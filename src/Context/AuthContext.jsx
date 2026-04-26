@@ -14,7 +14,7 @@ export default function AuthProvider({ children }) {
         const checkAuth = async () => {
             try {
                 const res = await axios.get(
-                    "http://localhost/TheAnimeList-Backend/perfil.php",
+                    "http://the-anime-list-backend.rf.gd/perfil.php",
                     { withCredentials: true }
                 );
 
