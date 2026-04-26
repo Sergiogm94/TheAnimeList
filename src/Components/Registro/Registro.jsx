@@ -17,7 +17,7 @@ export default function Registro() {
 
     try {
       const respuesta = await axios.post(
-        "http://the-anime-list-backend.rf.gd/register.php",
+        "https://the-anime-list-backend.rf.gd/register.php",
         data
       );
 
