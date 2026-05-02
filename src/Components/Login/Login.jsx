@@ -9,6 +9,7 @@ export default function Login() {
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [mostrarPassword, setMostrarPassword] = useState(false);
 
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
@@ -21,14 +22,17 @@ export default function Login() {
       const respuesta = await axios.post(
         "https://theanimelist-backend.onrender.com/login.php",
         data,
-        { withCredentials: true, headers: {
-        "Content-Type": "application/json"
-        } }
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       if (respuesta.data.success) {
         await login(respuesta.data.usuario);
-        navigate("/");  // Redirección automática al home.
+        navigate("/");
       } else {
         setError(respuesta.data.mensaje);
       }
@@ -54,10 +58,20 @@ export default function Login() {
 
         <label>Contraseña</label>
         <input
-          type="password"
+          type={mostrarPassword ? "text" : "password"}
           {...register("contraseña", { required: true })}
           placeholder="••••••••"
         />
+
+        {/* Toggle mostrar contraseña */}
+        <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <input
+            type="checkbox"
+            checked={mostrarPassword}
+            onChange={() => setMostrarPassword(!mostrarPassword)}
+          />
+          Mostrar contraseña
+        </label>
 
         <button type="submit" disabled={loading}>
           {loading ? "Entrando..." : "Entrar"}

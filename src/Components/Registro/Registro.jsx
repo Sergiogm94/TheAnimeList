@@ -8,6 +8,7 @@ export default function Registro() {
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [mostrarPassword, setMostrarPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,15 +22,12 @@ export default function Registro() {
         data
       );
 
-      console.log(respuesta.data);
-
       if (respuesta.data.success) {
         navigate("/loginreg");
       } else {
         setError(respuesta.data.mensaje || "Error al registrarse");
       }
     } catch (error) {
-      console.log("Error al enviar los datos", error);
       setError("Error de conexión con el servidor");
     } finally {
       setLoading(false);
@@ -57,10 +55,20 @@ export default function Registro() {
 
         <label>Contraseña</label>
         <input
-          type="password"
+          type={mostrarPassword ? "text" : "password"}
           placeholder="••••••••"
           {...register("contraseña", { required: true })}
         />
+
+        {/* Checkbox para mostrar contraseña */}
+        <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <input
+            type="checkbox"
+            checked={mostrarPassword}
+            onChange={() => setMostrarPassword(!mostrarPassword)}
+          />
+          Mostrar contraseña
+        </label>
 
         <button type="submit" disabled={loading}>
           {loading ? "Creando cuenta..." : "Enviar"}
