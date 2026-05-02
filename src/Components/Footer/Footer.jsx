@@ -14,7 +14,7 @@ export default function Footer() {
                 </p>
 
                 <ul className="footer-links">
-                    <li><NavLink to="/home">Home</NavLink></li>
+                    <li><NavLink to="/">Home</NavLink></li>
                     <li><NavLink to="/animes">Animes</NavLink></li>
                     <li><NavLink to="/personajes">Personajes</NavLink></li>
                     <li><NavLink to="/foro">Foro</NavLink></li>
