@@ -111,6 +111,7 @@ export default function Animes() {
         </div>
       </div>
 
+      {/* MODAL */}
       {animeSeleccionado && (
         <div
           className="modal-overlay"
@@ -137,7 +138,7 @@ export default function Animes() {
                 "Sin sinopsis disponible"}
             </p>
 
-            {/* TRAILER O FALLBACK YOUTUBE */}
+            {/* TRAILER O YOUTUBE FALLBACK */}
             {loadingModal ? (
               <p className="loading">Cargando trailer...</p>
             ) : animeSeleccionado?.trailer?.youtube_id ? (

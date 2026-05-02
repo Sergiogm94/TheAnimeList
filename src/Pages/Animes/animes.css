@@ -153,14 +153,14 @@
     line-height: 1.4;
 }
 
-/* YOUTUBE RESPONSIVE */
+/* YOUTUBE IFRAME */
 .modal-content iframe {
     width: 100%;
     height: 200px;
     border-radius: 8px;
 }
 
-/* BUTTONS */
+/* BUTTON CERRAR */
 .modal-content button {
     background: orange;
     border: none;
@@ -174,6 +174,41 @@
 
 .modal-content button:hover {
     background: #ff1f5a;
+}
+
+/* 🔥 YOUTUBE LINK BUTTON */
+.youtube-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: linear-gradient(135deg, #ff1f5a, #ff7a18);
+    color: white;
+
+    padding: 10px 14px;
+    margin-top: 10px;
+
+    border-radius: 25px;
+
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+
+    transition: all 0.3s ease;
+
+    box-shadow: 0 5px 15px rgba(255, 31, 90, 0.3);
+}
+
+.youtube-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 31, 90, 0.5);
+    filter: brightness(1.1);
+}
+
+.youtube-link:active {
+    transform: scale(0.98);
 }
 
 /* ANIMATION */
