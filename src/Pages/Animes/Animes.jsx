@@ -42,13 +42,13 @@ export default function Animes() {
     fetchAnimes();
   }, [pagina]);
 
-  const handleAnimeClick = async (id) => {
+  const handleAnimeClick = async (anime) => {
     setLoadingModal(true);
     setAnimeSeleccionado(null);
 
     try {
       const res = await axios.get(
-        `https://api.jikan.moe/v4/anime/${id}`
+        `https://api.jikan.moe/v4/anime/${anime.mal_id}`
       );
 
       setAnimeSeleccionado(res.data.data);
@@ -75,7 +75,7 @@ export default function Animes() {
               <div
                 className="anime-card"
                 key={anime.mal_id}
-                onClick={() => handleAnimeClick(anime.mal_id)}
+                onClick={() => handleAnimeClick(anime)}
               >
                 <img
                   src={anime.images?.jpg?.image_url}
@@ -137,6 +137,7 @@ export default function Animes() {
                 "Sin sinopsis disponible"}
             </p>
 
+            {/* TRAILER O FALLBACK YOUTUBE */}
             {loadingModal ? (
               <p className="loading">Cargando trailer...</p>
             ) : animeSeleccionado?.trailer?.youtube_id ? (
@@ -149,7 +150,16 @@ export default function Animes() {
                 allowFullScreen
               ></iframe>
             ) : (
-              <p className="no-trailer">No hay trailer disponible</p>
+              <a
+                className="youtube-link"
+                href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
+                  animeSeleccionado.title + " trailer"
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                🔎 Buscar trailer en YouTube
+              </a>
             )}
 
             <button onClick={() => setAnimeSeleccionado(null)}>
