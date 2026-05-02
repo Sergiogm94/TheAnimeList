@@ -13,11 +13,13 @@ export default function PaginaAnime() {
   const [animes, setAnimes] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [animeSeleccionado, setAnimeSeleccionado] = useState(null);
+  const [loadingModal, setLoadingModal] = useState(false);
+
   const { usuario, favoritos, setFavoritos } = useContext(AuthContext);
 
   const busqueda = new URLSearchParams(location.search).get("q");
 
-  // Funcion para cargar los animes según la busqueda.
   useEffect(() => {
     const fetchAnimes = async () => {
       try {
@@ -38,14 +40,12 @@ export default function PaginaAnime() {
     if (busqueda) fetchAnimes();
   }, [busqueda]);
 
-  // Funcion para comprobar si un anime esta en favoritos.
   const esFavorito = (id_api) => {
     return favoritos?.some(
       (f) => Number(f.id_anime_api) === Number(id_api)
     );
   };
 
-  //Funcion para añadir un anime a favorito.
   const añadirFavorito = async (anime) => {
     try {
       const res = await axios.post(
@@ -79,6 +79,24 @@ export default function PaginaAnime() {
     }
   };
 
+  // 🔥 ABRIR MODAL CON DETALLE
+  const abrirModal = async (anime) => {
+    setLoadingModal(true);
+    setAnimeSeleccionado(null);
+
+    try {
+      const res = await axios.get(
+        `https://api.jikan.moe/v4/anime/${anime.mal_id}`
+      );
+
+      setAnimeSeleccionado(res.data.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoadingModal(false);
+    }
+  };
+
   if (loading) {
     return (
       <div>
@@ -106,7 +124,11 @@ export default function PaginaAnime() {
           const favorito = esFavorito(anime.mal_id);
 
           return (
-            <div key={anime.mal_id} className="anime-card">
+            <div
+              key={anime.mal_id}
+              className="anime-card"
+              onClick={() => abrirModal(anime)}
+            >
               <h3>{anime.title}</h3>
 
               <img
@@ -126,7 +148,10 @@ export default function PaginaAnime() {
                 ) : (
                   <button
                     className="fav-btn"
-                    onClick={() => añadirFavorito(anime)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      añadirFavorito(anime);
+                    }}
                   >
                     ⭐ Añadir a favoritos
                   </button>
@@ -136,6 +161,64 @@ export default function PaginaAnime() {
           );
         })}
       </div>
+
+      {/* MODAL */}
+      {animeSeleccionado && (
+        <div
+          className="modal-overlay"
+          onClick={() => setAnimeSeleccionado(null)}
+        >
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={animeSeleccionado.images?.jpg?.image_url}
+              alt={animeSeleccionado.title}
+            />
+
+            <h2>{animeSeleccionado.title}</h2>
+
+            <p>
+              <strong>Año:</strong>{" "}
+              {animeSeleccionado.year || "Desconocido"}
+            </p>
+
+            <p className="modal-synopsis">
+              {animeSeleccionado.synopsis ||
+                "Sin sinopsis disponible"}
+            </p>
+
+            {loadingModal ? (
+              <p className="loading">Cargando trailer...</p>
+            ) : animeSeleccionado?.trailer?.youtube_id ? (
+              <iframe
+                width="100%"
+                height="200"
+                src={`https://www.youtube.com/embed/${animeSeleccionado.trailer.youtube_id}`}
+                title="Trailer"
+                frameBorder="0"
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <a
+                className="youtube-link"
+                href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
+                  animeSeleccionado.title + " trailer"
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                🔎 Buscar trailer en YouTube
+              </a>
+            )}
+
+            <button onClick={() => setAnimeSeleccionado(null)}>
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
