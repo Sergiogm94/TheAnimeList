@@ -219,7 +219,7 @@ export default function PaginaAnime() {
                 target="_blank"
                 rel="noreferrer"
               >
-                🔎 Buscar openings en YouTube
+                🎤 Buscar openings en YouTube
               </a>
               </div>
                 
