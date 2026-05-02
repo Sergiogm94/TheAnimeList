@@ -1,59 +1,64 @@
-
 .container {
     position: sticky;
     top: 0;
     z-index: 1000;
     background: rgba(20, 20, 20, 0.8);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: box-shadow 0.3s ease, background 0.3s ease;
+    transition: 0.3s;
 }
 
 .container.scrolled {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
     background: rgba(20, 20, 20, 0.95);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
-/* NAV DESKTOP */
+/* WRAPPER */
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+}
+
+/* NAV */
 .nav-container {
     display: flex;
     align-items: center;
     gap: 25px;
     list-style: none;
     margin: 0;
-    padding: 15px 20px;
+    padding: 0;
+    flex: 1;
 }
 
 /* LINKS */
 .nav-container a {
-    display: inline-block;
     color: white;
     text-decoration: none;
     font-size: 25px;
-    font-weight: 500;
     transition: 0.3s;
 }
 
+/* 🔥 HOVER */
 .nav-container a:hover {
     color: orange;
-    transform: scale(1.2);
-}
-
-.nav-container a.active {
-    color: orange;
-    font-weight: bold;
     transform: scale(1.1);
 }
 
+/* 🔥 ACTIVE NAVLINK */
+.nav-container a.active {
+    color: orange;
+    font-weight: bold;
+}
+
+/* USER */
 .userData {
     color: white;
+    cursor: pointer;
 }
 
-.spacer {
-    flex: 1;
-}
-
+/* BOTÓN LOGOUT */
 .btnLogout {
     background: orange;
     border: none;
@@ -61,26 +66,26 @@
     border-radius: 6px;
     color: white;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.btnLogout:hover {
-    background: #ff1f5a;
-    transform: scale(1.05);
-}
-
-.nav-search {
+/* 🔥 BUSCADOR DESKTOP */
+.desktop-search {
     display: flex;
     align-items: center;
+    margin-left: auto;
+}
+
+/* 🔥 BUSCADOR MÓVIL */
+.mobile-search {
+    display: none;
 }
 
 /* HAMBURGER */
 .menu-icon {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 4px;
     cursor: pointer;
-    margin-left: 10px;
 }
 
 .menu-icon div {
@@ -88,10 +93,6 @@
     height: 3px;
     background: white;
     transition: 0.3s;
-}
-
-.menu-icon:hover div {
-    background: orange;
 }
 
 .menu-icon.open div:nth-child(1) {
@@ -109,35 +110,40 @@
 /* 📱 MOBILE */
 @media (max-width: 768px) {
 
+    .menu-icon {
+        display: flex;
+        z-index: 2000;
+    }
+
+    .desktop-search {
+        display: none;
+    }
+
     .nav-container {
+        display: none;
         flex-direction: column;
-        align-items: flex-start;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(20, 20, 20, 0.98);
+        padding: 20px;
         gap: 15px;
-        padding: 15px;
+        flex: none;
+    }
+
+    .nav-container.open {
+        display: flex;
     }
 
     .nav-container a {
         font-size: 18px;
     }
 
-    .spacer {
-        display: none;
-    }
-
-    .userData {
-        font-size: 14px;
-    }
-
-    .btnLogout {
-        padding: 5px 10px;
-        font-size: 14px;
-    }
-
-    .nav-search {
+    /* 🔥 BUSCADOR SOLO EN MENÚ MÓVIL */
+    .mobile-search {
+        display: flex;
         width: 100%;
-    }
-
-    .menu-icon {
-        align-self: flex-end;
+        margin-top: 10px;
     }
 }
