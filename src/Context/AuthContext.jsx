@@ -14,7 +14,7 @@ export default function AuthProvider({ children }) {
         const checkAuth = async () => {
             try {
                 const res = await axios.get(
-                    "https://the-anime-list-backend.rf.gd/perfil.php",
+                    "https://theanimelist-backend.onrender.com/perfil.php",
                     { withCredentials: true }
                 );
 
@@ -45,7 +45,7 @@ export default function AuthProvider({ children }) {
 
             try {
                 const res = await axios.get(
-                    "https://the-anime-list-backend.rf.gd/obtenerFavoritos.php",
+                    "https://theanimelist-backend.onrender.com/obtenerFavoritos.php",
                     { withCredentials: true }
                 );
 
@@ -67,7 +67,7 @@ export default function AuthProvider({ children }) {
 
     const logout = async () => {
         await axios.get(
-            "https://the-anime-list-backend.rf.gd/logout.php",
+            "https://theanimelist-backend.onrender.com/logout.php",
             { withCredentials: true }
         );
 

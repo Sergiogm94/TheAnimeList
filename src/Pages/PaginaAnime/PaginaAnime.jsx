@@ -24,7 +24,7 @@ export default function PaginaAnime() {
         setLoading(true);
 
         const res = await axios.get(
-          `https://the-anime-list-backend.rf.gd/apiAnimes.php?q=${busqueda}`
+          `https://theanimelist-backend.onrender.com/apiAnimes.php?q=${busqueda}`
         );
 
         setAnimes(res.data.data || []);
@@ -49,7 +49,7 @@ export default function PaginaAnime() {
   const añadirFavorito = async (anime) => {
     try {
       const res = await axios.post(
-        "https://the-anime-list-backend.rf.gd/añadirFavorito.php",
+        "https://theanimelist-backend.onrender.com/añadirFavorito.php",
         {
           id_anime_api: anime.mal_id,
           titulo: anime.title,

@@ -16,7 +16,7 @@ export default function ContenidoAnime() {
         const paginasFetch = [1, 2, 3];
 
         const requests = paginasFetch.map((pagina) =>
-          axios.get(`https://the-anime-list-backend.rf.gd/apiAnimes.php?page=${pagina}`)
+          axios.get(`https://theanimelist-backend.onrender.com/apiAnimes.php?page=${pagina}`)
           .catch(() => null)
         );
 

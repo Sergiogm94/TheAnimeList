@@ -19,7 +19,7 @@ export default function Login() {
 
     try {
       const respuesta = await axios.post(
-        "https://the-anime-list-backend.rf.gd/login.php",
+        "https://theanimelist-backend.onrender.com/login.php",
         data,
         { withCredentials: true }
       );

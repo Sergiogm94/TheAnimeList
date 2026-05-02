@@ -16,7 +16,7 @@ export default function Nav() {
         const obtenerUsuario = async () => {
             try {
                 const res = await axios.get(
-                    "https://the-anime-list-backend.rf.gd/perfil.php",
+                    "https://theanimelist-backend.onrender.com/perfil.php",
                     { withCredentials: true }
                 );
 
@@ -47,7 +47,7 @@ export default function Nav() {
     const logout = async () => {
         try {
             await axios.get(
-                "https://the-anime-list-backend.rf.gd/logout.php",
+                "https://theanimelist-backend.onrender.com/logout.php",
                 { withCredentials: true }
             );
 
