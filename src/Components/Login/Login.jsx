@@ -21,7 +21,9 @@ export default function Login() {
       const respuesta = await axios.post(
         "https://theanimelist-backend.onrender.com/login.php",
         data,
-        { withCredentials: true }
+        { withCredentials: true, headers: {
+        "Content-Type": "application/json"
+        } }
       );
 
       if (respuesta.data.success) {
