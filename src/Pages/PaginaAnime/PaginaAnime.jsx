@@ -201,7 +201,7 @@ export default function PaginaAnime() {
                 allowFullScreen
               ></iframe>
             ) : (
-              <a
+              <div> <a
                 className="youtube-link"
                 href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
                   animeSeleccionado.title + " trailer"
@@ -211,6 +211,18 @@ export default function PaginaAnime() {
               >
                 🔎 Buscar trailer en YouTube
               </a>
+               <a
+                className="youtube-link"
+                href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
+                  animeSeleccionado.title + " openings"
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                🔎 Buscar openings en YouTube
+              </a>
+              </div>
+                
             )}
 
             <button onClick={() => setAnimeSeleccionado(null)}>
