@@ -1,4 +1,3 @@
-
 .container {
     position: sticky;
     top: 0;
@@ -48,6 +47,7 @@
 
 .userData {
     color: white;
+    cursor: pointer;
 }
 
 .spacer {
@@ -76,11 +76,13 @@
 
 /* HAMBURGER */
 .menu-icon {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 4px;
     cursor: pointer;
-    margin-left: 10px;
+    position: absolute;
+    right: 20px;
+    top: 15px;
 }
 
 .menu-icon div {
@@ -109,19 +111,34 @@
 /* 📱 MOBILE */
 @media (max-width: 768px) {
 
+    .menu-icon {
+        display: flex;
+    }
+
     .nav-container {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: rgba(20, 20, 20, 0.98);
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
-        padding: 15px;
+        gap: 20px;
+        padding: 20px;
+        transform: translateY(-150%);
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.3s ease;
+    }
+
+    .nav-container.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .nav-container a {
         font-size: 18px;
-    }
-
-    .spacer {
-        display: none;
     }
 
     .userData {
@@ -135,9 +152,5 @@
 
     .nav-search {
         width: 100%;
-    }
-
-    .menu-icon {
-        align-self: flex-end;
     }
 }
