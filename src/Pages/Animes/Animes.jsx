@@ -12,6 +12,7 @@ export default function Animes() {
   const [animando, setAnimando] = useState(false);
 
   const [animeSeleccionado, setAnimeSeleccionado] = useState(null);
+  const [loadingModal, setLoadingModal] = useState(false);
 
   useEffect(() => {
     const fetchAnimes = async () => {
@@ -41,6 +42,23 @@ export default function Animes() {
     fetchAnimes();
   }, [pagina]);
 
+  const handleAnimeClick = async (id) => {
+    setLoadingModal(true);
+    setAnimeSeleccionado(null);
+
+    try {
+      const res = await axios.get(
+        `https://api.jikan.moe/v4/anime/${id}`
+      );
+
+      setAnimeSeleccionado(res.data.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoadingModal(false);
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -57,9 +75,7 @@ export default function Animes() {
               <div
                 className="anime-card"
                 key={anime.mal_id}
-                onClick={() => {
-                console.log(anime.title, anime.trailer);
-                setAnimeSeleccionado(anime)}}
+                onClick={() => handleAnimeClick(anime.mal_id)}
               >
                 <img
                   src={anime.images?.jpg?.image_url}
@@ -121,18 +137,20 @@ export default function Animes() {
                 "Sin sinopsis disponible"}
             </p>
 
-            {animeSeleccionado.trailer?.youtube_id ? (
-                <iframe
-                  width="100%"
-                  height="200"
-                  src={`https://www.youtube.com/embed/${animeSeleccionado.trailer.youtube_id}`}
-                  title="Trailer"
-                  frameBorder="0"
-                  allowFullScreen
-                ></iframe>
-              ) : (
-                <p className="no-trailer">No hay trailer disponible</p>
-              )}
+            {loadingModal ? (
+              <p className="loading">Cargando trailer...</p>
+            ) : animeSeleccionado?.trailer?.youtube_id ? (
+              <iframe
+                width="100%"
+                height="200"
+                src={`https://www.youtube.com/embed/${animeSeleccionado.trailer.youtube_id}`}
+                title="Trailer"
+                frameBorder="0"
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <p className="no-trailer">No hay trailer disponible</p>
+            )}
 
             <button onClick={() => setAnimeSeleccionado(null)}>
               Cerrar
